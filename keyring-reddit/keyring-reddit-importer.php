@@ -98,7 +98,14 @@ class Keyring_Reddit_Importer extends Keyring_Importer_Base {
 				break;
 				case 't3':
 					$post_title = $post->data->title;
-					$post_content = '<p><a href="' . esc_url( $post->data->url ) . '">' . esc_html( $post->data->title ) . '</a></p>';
+					
+					if ( ! empty( $post->data->selftext_html ) ) {
+						$post_content = html_entity_decode( $post->data->selftext_html );
+					}
+					else {
+						$post_content = '<p><a href="' . esc_url( $post->data->url ) . '">' . esc_html( $post->data->title ) . '</a></p>';
+					}
+					
 					$reddit_permalink = 'http://reddit.com' . $post->data->permalink;
 				break;
 			}
@@ -143,7 +150,6 @@ class Keyring_Reddit_Importer extends Keyring_Importer_Base {
 		$imported = 0;
 		$skipped  = 0;
 		foreach ( $this->posts as $post ) {
-			// See the end of extract_posts_from_data() for what is in here
 			extract( $post );
 
 			if (
