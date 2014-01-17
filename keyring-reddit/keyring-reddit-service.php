@@ -103,6 +103,8 @@ class Keyring_Service_Reddit extends Keyring_Service_OAuth2 {
 			$meta = array(
 				'username' => $response->name,
 				'user_id'  => $response->id,
+				'refresh_token' => $token['refresh_token'],
+				'expires' => time() + $token['expires_in'],
 			);
 		}
 
