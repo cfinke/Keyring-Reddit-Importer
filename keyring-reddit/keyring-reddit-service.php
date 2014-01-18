@@ -154,6 +154,9 @@ class Keyring_Service_Reddit extends Keyring_Service_OAuth2 {
 
 				$token = $this->parse_access_token( $token );
 
+				// Remove the previous token.
+				$this->store->delete( array( 'id' => $this->token->unique_id ) );
+
 				$access_token = new Keyring_Access_Token(
 					$this->get_name(),
 					$token['access_token'],
@@ -162,7 +165,8 @@ class Keyring_Service_Reddit extends Keyring_Service_OAuth2 {
 
 				$access_token = apply_filters( 'keyring_access_token', $access_token, $token );
 
-				$id = $this->store_token( $access_token );
+				$this->store_token( $access_token );
+				$this->token = $access_token;
 			}
 			else {
 				Keyring::error(
