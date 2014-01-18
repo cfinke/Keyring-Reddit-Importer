@@ -24,7 +24,7 @@ class Keyring_Service_Reddit extends Keyring_Service_OAuth2 {
 		$this->secret  = $creds['secret'];
 
 		$this->set_endpoint( 'authorize',    'https://ssl.reddit.com/api/v1/authorize', 'GET' );
-		$this->set_endpoint( 'access_token', 'https://' . $this->key . ':' . $this->secret . '@ssl.reddit.com/api/v1/access_token', 'POST' );
+		$this->set_endpoint( 'access_token', 'https://' . urlencode( $this->key ) . ':' . urlencode( $this->secret ) . '@ssl.reddit.com/api/v1/access_token', 'POST' );
 		$this->set_endpoint( 'self',         'https://oauth.reddit.com/api/v1/me.json',   'GET' );
 
 		$this->authorization_header = 'Bearer';
