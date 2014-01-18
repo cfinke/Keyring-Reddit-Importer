@@ -7,6 +7,7 @@ Version: 1.0
 Author: Christopher Finke
 Author URI: http://www.chrisfinke.com/
 License: GPL2
+Depends: Keyring, Keyring Social Importers
 */
 
 function keyring_reddit_enable_service( $services ) {
