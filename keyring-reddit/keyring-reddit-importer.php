@@ -41,6 +41,8 @@ class Keyring_Reddit_Importer extends Keyring_Importer_Base {
 	}
 
 	function build_request_url() {
+		$this->service->maybe_refresh_token();
+		
 		$url = "https://oauth.reddit.com/user/cfinke/overview.json";
 
 		if ( $this->auto_import ) {

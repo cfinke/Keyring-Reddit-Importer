@@ -110,6 +110,72 @@ class Keyring_Service_Reddit extends Keyring_Service_OAuth2 {
 
 		return apply_filters( 'keyring_access_token_meta', $meta, 'reddit', $token, $response, $this );
 	}
+	
+	/**
+	 * Reddit's "permanent" tokens are only permanent in the sense that they can be
+	 * renewed continually, not that they don't need to be renewed.
+	 *
+	 * Check before making requests that the old token hasn't expired, and if it has,
+	 * renew it.
+	 */
+	function maybe_refresh_token() {
+		global $wpdb;
+
+		if ( empty( $this->token->token ) || empty( $this->token->meta['expires'] ) )
+			return;
+
+		if ( $this->token->meta['expires'] < time() ) {
+			$url = $this->access_token_url;
+
+			if ( !stristr( $url, '?' ) )
+				$url .= '?';
+
+			$params = array(
+				'client_id'     => $this->key,
+				'client_secret' => $this->secret,
+				'grant_type'    => 'refresh_token',
+				'redirect_uri'  => $this->callback_url,
+				'refresh_token' => $this->token->meta['refresh_token'],
+			);
+
+			$params = apply_filters( 'keyring_' . $this->get_name() . '_verify_token_params', $params );
+
+			switch ( strtoupper( $this->access_token_method ) ) {
+				case 'GET':
+					$res = wp_remote_get( $url . http_build_query( $params ) );
+					break;
+				case 'POST':
+					$res = wp_remote_post( $url, array( 'body' => $params ) );
+					break;
+			}
+
+			if ( 200 == wp_remote_retrieve_response_code( $res ) ) {
+				$token = wp_remote_retrieve_body( $res );
+
+				$token = $this->parse_access_token( $token );
+
+				$access_token = new Keyring_Access_Token(
+					$this->get_name(),
+					$token['access_token'],
+					$this->build_token_meta( $token )
+				);
+
+				$access_token = apply_filters( 'keyring_access_token', $access_token, $token );
+
+				$id = $this->store_token( $access_token );
+			}
+			else {
+				Keyring::error(
+					sprintf( __( 'There was a problem authorizing with %s. Please try again in a moment.', 'keyring' ), $this->get_label() ),
+					$error_debug_info
+				);
+
+				return false;
+			}
+
+			return true;
+		}
+	}
 }
 
 add_action( 'keyring_load_services', array( 'Keyring_Service_Reddit', 'init' ) );
