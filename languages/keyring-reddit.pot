@@ -1,0 +1,55 @@
+# Copyright (C) 2014 
+# This file is distributed under the same license as the  package.
+msgid ""
+msgstr ""
+"Project-Id-Version:  \n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/reddit-for-keyring\n"
+"POT-Creation-Date: 2014-01-21 22:41:48+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2014-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#: keyring-reddit/keyring-reddit-importer.php:18
+msgid "Make sure you select a valid category to import your activity into."
+msgstr ""
+
+#: keyring-reddit/keyring-reddit-importer.php:21
+msgid "You must select an author to assign to all submissions and comments."
+msgstr ""
+
+#: keyring-reddit/keyring-reddit-importer.php:84
+msgid ""
+"Failed to download your activity from Reddit. Please wait a few minutes and "
+"try again."
+msgstr ""
+
+#: keyring-reddit/keyring-reddit-importer.php:97
+msgid "Commented on %s"
+msgstr ""
+
+#: keyring-reddit/keyring-reddit-importer.php:213
+msgid "Download all of your Reddit comments and submissions."
+msgstr ""
+
+#: keyring-reddit/keyring-reddit-service.php:42
+msgid ""
+"To get started, <a href='https://ssl.reddit.com/prefs/apps'>register an "
+"OAuth client on Reddit</a>. The most important setting is the "
+"<strong>redirect uri</strong>, which should be set to <code>%s</code>. You "
+"can set the other values to whatever you like."
+msgstr ""
+
+#: keyring-reddit/keyring-reddit-service.php:43
+msgid ""
+"Once you've saved those changes, copy the <strong>API key</strong> (shown "
+"directly beneath your app's name) into the <strong>API Key</strong> field, "
+"and the <strong>secret</strong> value into the <strong>API Secret</strong> "
+"field and click save."
+msgstr ""
+
+#: keyring-reddit/keyring-reddit-service.php:173
+msgid "There was a problem authorizing with %s. Please try again in a moment."
+msgstr ""
