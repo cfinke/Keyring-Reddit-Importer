@@ -170,7 +170,7 @@ class Keyring_Service_Reddit extends Keyring_Service_OAuth2 {
 			}
 			else {
 				Keyring::error(
-					sprintf( __( 'There was a problem authorizing with %s. Please try again in a moment.', 'keyring-reddit' ), $this->get_label() ),
+					sprintf( __( 'There was a problem authorizing with %s. Please try again in a moment.', 'keyring' ), $this->get_label() ),
 					$error_debug_info
 				);
 
