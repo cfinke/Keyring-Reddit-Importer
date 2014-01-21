@@ -39,8 +39,8 @@ class Keyring_Service_Reddit extends Keyring_Service_OAuth2 {
 	}
 
 	function basic_ui_intro() {
-		echo '<p>' . sprintf( __( "To get started, <a href='https://ssl.reddit.com/prefs/apps'>register an OAuth client on Reddit</a>. The most important setting is the <strong>redirect uri</strong>, which should be set to <code>%s</code>. You can set the other values to whatever you like.", 'keyring' ), Keyring_Util::admin_url( 'reddit', array( 'action' => 'verify' ) ) ) . '</p>';
-		echo '<p>' . __( "Once you've saved those changes, copy the <strong>API key</strong> (shown directly beneath your app's name) into the <strong>API Key</strong> field, and the <strong>secret</strong> value into the <strong>API Secret</strong> field and click save.", 'keyring' ) . '</p>';
+		echo '<p>' . sprintf( __( "To get started, <a href='https://ssl.reddit.com/prefs/apps'>register an OAuth client on Reddit</a>. The most important setting is the <strong>redirect uri</strong>, which should be set to <code>%s</code>. You can set the other values to whatever you like.", 'keyring-reddit' ), Keyring_Util::admin_url( 'reddit', array( 'action' => 'verify' ) ) ) . '</p>';
+		echo '<p>' . __( "Once you've saved those changes, copy the <strong>API key</strong> (shown directly beneath your app's name) into the <strong>API Key</strong> field, and the <strong>secret</strong> value into the <strong>API Secret</strong> field and click save.", 'keyring-reddit' ) . '</p>';
 	}
 
 	function get_display( Keyring_Access_Token $token ) {
@@ -170,7 +170,7 @@ class Keyring_Service_Reddit extends Keyring_Service_OAuth2 {
 			}
 			else {
 				Keyring::error(
-					sprintf( __( 'There was a problem authorizing with %s. Please try again in a moment.', 'keyring' ), $this->get_label() ),
+					sprintf( __( 'There was a problem authorizing with %s. Please try again in a moment.', 'keyring-reddit' ), $this->get_label() ),
 					$error_debug_info
 				);
 

@@ -15,10 +15,10 @@ class Keyring_Reddit_Importer extends Keyring_Importer_Base {
 	function handle_request_options() {
 		// Validate options and store them so they can be used in auto-imports
 		if ( empty( $_POST['category'] ) || !ctype_digit( $_POST['category'] ) )
-			$this->error( __( "Make sure you select a valid category to import your statuses into." ) );
+			$this->error( __( "Make sure you select a valid category to import your statuses into.", 'keyring-reddit' ) );
 
 		if ( empty( $_POST['author'] ) || !ctype_digit( $_POST['author'] ) )
-			$this->error( __( "You must select an author to assign to all statuses." ) );
+			$this->error( __( "You must select an author to assign to all statuses.", 'keyring-reddit' ) );
 
 		if ( isset( $_POST['auto_import'] ) )
 			$_POST['auto_import'] = true;
@@ -81,7 +81,7 @@ class Keyring_Reddit_Importer extends Keyring_Importer_Base {
 
 		if ( null === $importdata ) {
 			$this->finished = true;
-			return new Keyring_Error( 'keyring-reddit-importer-failed-download', __( 'Failed to download your activity from Reddit. Please wait a few minutes and try again.' ) );
+			return new Keyring_Error( 'keyring-reddit-importer-failed-download', __( 'Failed to download your activity from Reddit. Please wait a few minutes and try again.', 'keyring-reddit' ) );
 		}
 
 		// Make sure we have some statuses to parse
@@ -94,7 +94,7 @@ class Keyring_Reddit_Importer extends Keyring_Importer_Base {
 		foreach ( $importdata->data->children as $post ) {
 			switch ( $post->kind ) {
 				case 't1':
-					$post_title = sprintf( __( 'Commented on %s' ), $post->data->link_title );
+					$post_title = sprintf( __( 'Commented on %s', 'keyring-reddit' ), $post->data->link_title );
 					$post_content = html_entity_decode( $post->data->body_html );
 					$reddit_permalink = 'http://reddit.com/r/' . $post->data->subreddit . '/' . array_pop( explode( '_', $post->data->link_id ) ) . '/';
 				break;
@@ -210,6 +210,6 @@ add_action( 'init', function() {
 		'reddit',
 		'Keyring_Reddit_Importer',
 		plugin_basename( __FILE__ ),
-		__( 'Download all of your Reddit comments and submissions.', 'keyring' )
+		__( 'Download all of your Reddit comments and submissions.', 'keyring-reddit' )
 	);
 } );
