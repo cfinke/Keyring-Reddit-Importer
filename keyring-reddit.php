@@ -10,6 +10,8 @@ License: GPL2
 Depends: Keyring, Keyring Social Importers
 */
 
+require( plugin_dir_path( __FILE__ ) . 'keyring-reddit/keyring-reddit-importer.php' );
+
 function keyring_reddit_enable_service( $services ) {
 	$services[] = plugin_dir_path( __FILE__ ) . 'keyring-reddit/keyring-reddit-service.php';
 	
@@ -17,11 +19,3 @@ function keyring_reddit_enable_service( $services ) {
 }
 
 add_filter( 'keyring_services', 'keyring_reddit_enable_service' );
-
-function keyring_reddit_enable_importer( $importers ) {
-	$importers[] = plugin_dir_path( __FILE__ ) . 'keyring-reddit/keyring-reddit-importer.php';
-	
-	return $importers;
-}
-
-add_filter( 'keyring_importers', 'keyring_reddit_enable_importer' );
