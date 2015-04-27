@@ -43,10 +43,12 @@ class Keyring_Reddit_Importer extends Keyring_Importer_Base {
 	function build_request_url() {
 		$this->service->maybe_refresh_token();
 		
-		$url = "https://oauth.reddit.com/user/cfinke/overview.json";
+		$username = $this->service->get_token()->get_display();
 
-		if ( $this->auto_import ) {
-			// Get most recent checkin we've imported (if any), and its date so that we can get new ones since then
+		$url = "https://oauth.reddit.com/user/" . $username . "/overview.json";
+
+		if ( $this->get_option( 'auto_import' ) ) {
+			// Get most recent post/comment we've imported (if any), and its date so that we can get new ones since then
 			$latest = get_posts( array(
 				'numberposts' => 1,
 				'orderby'     => 'date',
@@ -193,7 +195,7 @@ class Keyring_Reddit_Importer extends Keyring_Importer_Base {
 				do_action( 'keyring_post_imported', $post_id, static::SLUG, $post );
 			}
 		}
-		
+
 		$this->posts = array();
 
 		// Return, so that the handler can output info (or update DB, or whatever)
