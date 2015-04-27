@@ -3,7 +3,7 @@
 /*
 Plugin Name: Reddit for Keyring
 Description: Adds a Reddit service and importer to Keyring and Keyring Social Importers
-Version: 1.0
+Version: 1.1
 Author: Christopher Finke
 Author URI: http://www.chrisfinke.com/
 License: GPL2

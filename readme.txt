@@ -1,9 +1,9 @@
 === Reddit for Keyring ===
 Contributors: cfinke
 Tags: reddit, archive, keyring, keyring social imports, import
-Requires at least: 3.6
-Tested up to: 3.8.1
-Stable tag: 1.0
+Requires at least: 4.2
+Tested up to: 4.2
+Stable tag: 1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: reddit-keyring
@@ -36,5 +36,11 @@ Your Reddit posts and comments are imported directly from Reddit to your WordPre
 
 == Changelog ==
 
+= 1.1 =
+
+* Update for compatibility with the latest Keyring and Keyring Social Importers plugins.
+* Fixed a bug that caused the importer to always import my Reddit activity, not the connected user's.
+
 = 1.0 =
-Import comments and submissions.
+
+* Import comments and submissions.
