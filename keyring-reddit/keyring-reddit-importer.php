@@ -62,11 +62,11 @@ class Keyring_Reddit_Importer extends Keyring_Importer_Base {
 			// If we have already imported some, then start since the most recent
 			if ( $latest ) {
 				$raw_data = get_post_meta( $latest[0]->ID, 'raw_import_data', true );
-				$url = add_query_arg( 'before', $raw_data->data->name, $url );
+				$url = add_query_arg( 'before', rawurlencode( $raw_data->data->name ), $url );
 			}
 		} else {
 			if ( $this->get_option( 'after' ) ) {
-				$url = add_query_arg( 'after', $this->get_option( 'after' ), $url );
+				$url = add_query_arg( 'after', rawurlencode( $this->get_option( 'after' ) ), $url );
 				$url = add_query_arg( 'count', 0, $url );
 			}
 		}
