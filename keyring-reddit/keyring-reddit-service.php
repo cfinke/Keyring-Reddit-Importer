@@ -180,6 +180,11 @@ class Keyring_Service_Reddit extends Keyring_Service_OAuth2 {
 			return true;
 		}
 	}
+
+	function is_configured() {
+		$credentials = $this->get_credentials();
+		return !empty( $credentials['key'] ) && !empty( $credentials['secret'] );
+	}
 }
 
 add_action( 'keyring_load_services', array( 'Keyring_Service_Reddit', 'init' ) );
