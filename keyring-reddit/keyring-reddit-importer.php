@@ -98,7 +98,11 @@ class Keyring_Reddit_Importer extends Keyring_Importer_Base {
 				case 't1':
 					$post_title = sprintf( __( 'Commented on %s', 'keyring-reddit' ), $post->data->link_title );
 					$post_content = html_entity_decode( $post->data->body_html );
-					$reddit_permalink = 'http://reddit.com/r/' . $post->data->subreddit . '/' . array_pop( explode( '_', $post->data->link_id ) ) . '/';
+
+					$link_parts = explode( '_', $post->data->link_id );
+					$link_id = array_pop( $link_parts );
+
+					$reddit_permalink = 'http://reddit.com/r/' . $post->data->subreddit . '/' . $link_id . '/';
 				break;
 				case 't3':
 					$post_title = $post->data->title;
